@@ -47,7 +47,34 @@ end
 The auth hash `request.env['omniauth.auth']` would look like this:
 
 ```js
-TODO
+{
+  "result": {
+    "provider": "calendly",
+    "uid": "U12345678",
+    "info": {},
+    "credentials": {
+      "token": "ACCESS_TOKEN",
+      "refresh_token": "REFRESH_TOKEN",
+      "expires_at": 1596529477,
+      "expires": true
+    },
+    "extra": {
+      "raw_info": {
+        "resource": {
+          "avatar_url": "https://xxx.cloudfront.net/uploads/user/avatar/xxx/xxx.gif",
+          "created_at": "2020-07-17T05:36:18.596606Z",
+          "email": "hoge@example.com",
+          "name": "USER_NAME",
+          "scheduling_url": "https://calendly.com/hogehoge",
+          "slug": "hogehoge",
+          "timezone": "Asia/Tokyo",
+          "updated_at": "2020-08-03T15:28:55.101449Z",
+          "uri": "https://api.calendly.com/users/U12345678"
+        }
+      }
+    }
+  }
+}
 ```
 
 ## Contributing
