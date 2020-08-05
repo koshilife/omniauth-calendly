@@ -9,7 +9,9 @@ module OmniAuth
       option :name, 'calendly'
       option :client_options, :site => 'https://auth.calendly.com'
 
-      uid { raw_info['id'] }
+      USER_API_URL = 'https://api.calendly.com/users/'
+
+      uid { extract_uid }
       extra { {:raw_info => raw_info} }
 
     private
@@ -17,15 +19,25 @@ module OmniAuth
       def raw_info
         return @raw_info if defined?(@raw_info)
 
-        endpoint = 'https://api.calendly.com/users/me'
-        @raw_info = access_token.get(endpoint).parsed
-      rescue ::OAuth2::Error => e
-        log(:error, "#{e.class} occured. message:#{e.message}")
-        @raw_info = {}
+        @raw_info = access_token.get("#{USER_API_URL}me").parsed
       end
 
       def callback_url
         full_host + script_name + callback_path
+      end
+
+      def extract_uid
+        user_info = raw_info
+        return unless user_info
+        return unless raw_info['resource']
+        return unless raw_info['resource']['uri']
+
+        uri = raw_info['resource']['uri']
+        re = /\A#{USER_API_URL}(.+)\z/
+        m = re.match uri
+        return if m.nil?
+
+        m[1]
       end
     end
   end
