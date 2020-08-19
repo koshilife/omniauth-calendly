@@ -1,3 +1,8 @@
+# 0.2.0
+
+- refs #5 fix dependencies.
+- remove minitest-reporter.
+
 # 0.1.0
 
 - #1 extract uid from user api response.
