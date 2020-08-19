@@ -8,8 +8,6 @@ if ENV['CI'] == 'true'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 require 'minitest/autorun'
-require 'minitest/reporters'
-Minitest::Reporters.use!
 require 'webmock/minitest'
 
 require 'omniauth-calendly'
