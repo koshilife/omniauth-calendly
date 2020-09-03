@@ -18,7 +18,7 @@ class StrategyCalendlyTest < StrategyTest
   def test_that_it_returns_auth_hash_in_callback_phase
     add_mock_exchange_token
     add_mock_user_info
-    post '/auth/calendly/callback', :code => @authorization_code, :state => 'state123'
+    post '/auth/calendly/callback', code: @authorization_code, state: 'state123'
 
     actual_auth = auth_hash.to_hash
     assert(!actual_auth['credentials'].delete('expires_at').nil?)
