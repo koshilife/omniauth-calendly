@@ -7,12 +7,12 @@ module OmniAuth
     # OmniAuth strategy for Calendly
     class Calendly < OmniAuth::Strategies::OAuth2
       option :name, 'calendly'
-      option :client_options, :site => 'https://auth.calendly.com'
+      option :client_options, site: 'https://auth.calendly.com'
 
       USER_API_URL = 'https://api.calendly.com/users/'
 
       uid { extract_uid }
-      extra { {:raw_info => raw_info} }
+      extra { {raw_info: raw_info} }
 
     private
 
