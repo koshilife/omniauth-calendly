@@ -23,11 +23,11 @@ module OmniAuth
       end
 
       def extract_uid
-        return unless raw_info
-        return unless raw_info['resource']
-        return unless raw_info['resource']['uri']
+        return unless raw_info.respond_to?(:dig)
 
-        uri = raw_info['resource']['uri']
+        uri = raw_info.dig('resource', 'uri')
+        return unless uri
+
         re = /\A#{USER_API_URL}(.+)\z/
         m = re.match uri
         return if m.nil?
