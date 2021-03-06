@@ -22,13 +22,8 @@ module OmniAuth
         @raw_info = access_token.get("#{USER_API_URL}me").parsed
       end
 
-      def callback_url
-        full_host + callback_path
-      end
-
       def extract_uid
-        user_info = raw_info
-        return unless user_info
+        return unless raw_info
         return unless raw_info['resource']
         return unless raw_info['resource']['uri']
 
@@ -38,6 +33,10 @@ module OmniAuth
         return if m.nil?
 
         m[1]
+      end
+
+      def callback_url
+        full_host + callback_path
       end
     end
   end
